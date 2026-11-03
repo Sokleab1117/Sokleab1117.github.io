@@ -1,4 +1,4 @@
-# LAY SOKLEAB
+# LAY SOKLEAB (ឡាយ សុខលាប)
 **3rd-Year Data Science Undergraduate · Applied Mathematics & Statistics (ITC)**  
 Phnom Penh, Cambodia | (+855) 096 267 0901 | laysokleab55@gmail.com | [linkedin.com/in/sokleab-lay-558654448](https://www.linkedin.com/in/sokleab-lay-558654448/)  
 

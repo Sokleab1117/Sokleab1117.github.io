@@ -1,4 +1,4 @@
-# Lay Sokleab (ឡាយ សុឃ្លាប)
+# Lay Sokleab (ឡាយ សុខលាប)
 ### 3rd-Year Data Science Undergraduate · Applied Mathematics & Statistics (ITC)
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Sokleab_Lay-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/sokleab-lay-558654448/)
