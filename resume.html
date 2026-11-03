@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lay Sokleab — Resume / Curriculum Vitae</title>
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+      background-color: #f1f5f9;
+      line-height: 1.5;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .resume-container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Print Styles: Perfect formatting when saving as PDF via Ctrl+P */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .resume-container {
+        box-shadow: none !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 1.5cm !important;
+      }
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="py-8 px-4 sm:px-6">
+
+  <!-- Floating Action Bar (Hidden during Print / PDF generation) -->
+  <div class="no-print max-w-[850px] mx-auto mb-6 flex flex-wrap items-center justify-between gap-4 bg-slate-900 text-white px-6 py-3.5 rounded-2xl shadow-xl">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors" title="Back to Portfolio">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      </a>
+      <div>
+        <p class="text-sm font-semibold">Lay Sokleab — Official Resume</p>
+        <p class="text-xs text-slate-400">Ready to save as a clean PDF or print</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button onclick="window.print()" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-semibold text-xs tracking-wide uppercase transition-all shadow-md flex items-center gap-2">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>Save as PDF / Print</span>
+      </button>
+      <a href="index.html" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-medium text-xs transition-colors">
+        Back to Website
+      </a>
+    </div>
+  </div>
+
+  <!-- THE RESUME DOCUMENT -->
+  <div class="resume-container p-8 sm:p-14 rounded-2xl border border-slate-200">
+    
+    <!-- HEADER -->
+    <header class="border-b-2 border-slate-900 pb-6 mb-6">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+          LAY SOKLEAB
+        </h1>
+        <div class="text-xs font-mono font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-md border border-teal-200/80 w-fit">
+          GPA 4.0 / 4.0 · ITC (AMS)
+        </div>
+      </div>
+      
+      <p class="text-sm font-semibold text-slate-700 mt-1 uppercase tracking-wider">
+        3rd-Year Data Science Undergraduate · Applied Mathematics & Statistics
+      </p>
+
+      <!-- Contact Bar -->
+      <div class="flex flex-wrap items-center gap-y-1.5 gap-x-4 text-xs text-slate-600 mt-3 pt-3 border-t border-slate-100">
+        <span class="flex items-center gap-1.5">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
+          Phnom Penh, Cambodia
+        </span>
+        <span>•</span>
+        <a href="tel:0962670901" class="flex items-center gap-1.5 hover:text-teal-600">
+          <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i>
+          (+855) 096 267 0901
+        </a>
+        <span>•</span>
+        <a href="mailto:laysokleab55@gmail.com" class="flex items-center gap-1.5 hover:text-teal-600">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i>
+          laysokleab55@gmail.com
+        </a>
+        <span>•</span>
+        <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" class="flex items-center gap-1.5 text-teal-700 hover:underline font-medium">
+          <i data-lucide="linkedin" class="w-3.5 h-3.5 text-teal-600"></i>
+          linkedin.com/in/sokleab-lay-558654448
+        </a>
+      </div>
+    </header>
+
+    <!-- EXECUTIVE PROFILE -->
+    <section class="mb-6">
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-2">
+        Professional Summary
+      </h2>
+      <p class="text-xs text-slate-700 leading-relaxed text-justify">
+        High-achieving Data Science engineering undergraduate maintaining a perfect <strong>4.0 GPA for three consecutive years</strong> at the Institute of Technology of Cambodia (ITC). Combines rigorous mathematical optimization and statistical analysis skills with practical expertise in building production full-stack web applications and AI integration. Proven leadership record across national academic competitions, youth coding education, and smart city urban initiatives, including winning the Proof of Concept (PoC) for the <strong>Siem Reap Smart City Initiative under the JICA framework</strong>.
+      </p>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="mb-6">
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-3">
+        Education
+      </h2>
+      <div class="space-y-3">
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">Institute of Technology of Cambodia (ITC)</h3>
+            <span class="text-[11px] font-mono text-slate-500">2023 – Present (3rd Year)</span>
+          </div>
+          <div class="flex justify-between items-baseline text-xs text-slate-700 mt-0.5">
+            <span>Bachelor of Science in Data Science / Applied Mathematics and Statistics (AMS)</span>
+            <span class="font-bold text-teal-700 font-mono">GPA: 4.0 / 4.0</span>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-0.5">
+            • Maintained a perfect 4.0 GPA across Year 1, Year 2, and Year 3. Full 5-Year Academic Scholarship Holder (AMT).
+          </p>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">Australian Centre for Education (ACE) & Spring Education Center</h3>
+            <span class="text-[11px] font-mono text-slate-500">Completed 2026</span>
+          </div>
+          <p class="text-xs text-slate-700 mt-0.5">
+            Advanced English Language & Communication Studies · <strong>Certified IELTS Overall Band 6.0 (IDP Education)</strong>
+          </p>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">Bunrany Hunsen Speu High School</h3>
+            <span class="text-[11px] font-mono text-slate-500">2021 – 2023</span>
+          </div>
+          <p class="text-xs text-slate-700 mt-0.5">
+            National High School Examination (Baccalaureate II 2023) · <strong>Grade A Distinction</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS & LANGUAGES -->
+    <section class="mb-6">
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-2.5">
+        Technical Skills & Languages
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-4 text-xs text-slate-700">
+        <div>
+          <span class="font-bold text-slate-900">Programming Languages:</span> Python, C++, SQL, JavaScript (ES6+), HTML5, CSS3
+        </div>
+        <div>
+          <span class="font-bold text-slate-900">Data Science & AI:</span> Edge AI, Computer Vision, Real-Time CCTV Streams, EDA, Convex Optimization
+        </div>
+        <div>
+          <span class="font-bold text-slate-900">Backend & Web:</span> Node.js, Express.js, MySQL, REST APIs, JWT, Bcrypt
+        </div>
+        <div>
+          <span class="font-bold text-slate-900">Deployment & Tools:</span> Claude & Gemini API, Git, Railway, Netlify, VS Code
+        </div>
+        <div class="sm:col-span-2 pt-1 border-t border-slate-100 flex items-center gap-4 text-[11px]">
+          <span class="font-bold text-slate-900">Languages:</span>
+          <span>Khmer (Native)</span>
+          <span>•</span>
+          <span>English (IELTS 6.0 - IDP Certified)</span>
+          <span>•</span>
+          <span>French (Beginner)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY PROJECTS -->
+    <section class="mb-6">
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-3">
+        Key Projects
+      </h2>
+      <div class="space-y-3.5">
+        <!-- Project 1 -->
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">
+              Sovatthepheap-SR (សុវត្ថិភាពសៀមរាប) — AI Traffic Safety Monitoring System
+            </h3>
+            <span class="text-[11px] font-mono font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+              🥇 JICA PoC Winner (2026)
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">
+            Tech: Edge AI, Computer Vision, Real-Time Municipal CCTV Streams · Team LAVA · Supervisor: Dr. Has Sothea
+          </p>
+          <ul class="list-disc list-inside text-xs text-slate-700 mt-1 space-y-0.5">
+            <li>Utilizes edge AI and computer vision models to analyze municipal CCTV video streams in real-time at the National Road No. 6 and Sivutha Road intersection in Siem Reap.</li>
+            <li>Delivers data-driven traffic insights and safety monitoring telemetry directly to municipal authorities to enhance urban safety and management under the JICA framework.</li>
+          </ul>
+        </div>
+
+        <!-- Project 2 -->
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">
+              YOUR HOPE — AI-Powered Bilingual Mental Health Web Platform
+            </h3>
+            <span class="text-[11px] font-mono text-slate-500">2025 – 2026</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">
+            Tech: Node.js, Express.js, MySQL, Claude API & Gemini API, Netlify, Railway, HTML5/CSS/JS
+          </p>
+          <ul class="list-disc list-inside text-xs text-slate-700 mt-1 space-y-0.5">
+            <li>Engineered a bilingual (Khmer/English) web application implementing the clinical DASS-21 framework for depression, anxiety, and stress assessment.</li>
+            <li>Integrated an AI LLM backend for real-time, empathetic, and culturally nuanced guidance, backed by a relational directory of mental health providers across Cambodia.</li>
+          </ul>
+        </div>
+
+        <!-- Project 3 -->
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">
+              RentKH — Online Relational Room Renting Platform
+            </h3>
+            <span class="text-[11px] font-mono text-slate-500">2025 – 2026</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">
+            Tech: Node.js, Express.js, MySQL, JWT, Bcrypt, HTML/CSS/JavaScript
+          </p>
+          <ul class="list-disc list-inside text-xs text-slate-700 mt-1 space-y-0.5">
+            <li>Co-built a full-stack web marketplace connecting tenants, landlords, and administrators to modernize property and room rentals in Cambodia.</li>
+            <li>Architected relational MySQL database schemas with foreign keys and indexes; implemented secure JWT authentication and Bcrypt hashing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE & LEADERSHIP -->
+    <section class="mb-6">
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-3">
+        Experience & Community Leadership
+      </h2>
+      <div class="space-y-3">
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">School of Mathematics and Science (SMS)</h3>
+            <span class="text-[11px] font-mono text-slate-500">2024 – Present</span>
+          </div>
+          <p class="text-xs font-semibold text-slate-700">Role: Physics & Coding Instructor</p>
+          <p class="text-xs text-slate-600 mt-0.5">
+            • Teach physics directly to secondary school students; design and lead specialized programming logic and coding courses tailored for young learners.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">Startup Grind Cambodia (Phnom Penh Chapter)</h3>
+            <span class="text-[11px] font-mono text-slate-500">Jul 2025 – Jan 2026</span>
+          </div>
+          <p class="text-xs font-semibold text-slate-700">Role: Event & Operations Volunteer</p>
+          <p class="text-xs text-slate-600 mt-0.5">
+            • Facilitated community networking events and operational logistics for Cambodia's startup ecosystem under Director Bill Sokhy Chea.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex justify-between items-baseline">
+            <h3 class="text-xs font-bold text-slate-900">IDP Global Education Fair 2026 & Next Wave AI Competition</h3>
+            <span class="text-[11px] font-mono text-slate-500">2025 – 2026</span>
+          </div>
+          <p class="text-xs text-slate-600 mt-0.5">
+            • Managed on-site registration workflows for hundreds of candidates at the IDP Fair; provided operational assistance for DeGrand Solution's AI & Human 2.0 challenge.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS & HONORS -->
+    <section>
+      <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-slate-900 border-b border-slate-200 pb-1 mb-2">
+        Honors & Scholarships
+      </h2>
+      <ul class="text-xs text-slate-700 space-y-1">
+        <li>• <strong>Winner, Proof of Concept (PoC)</strong> — JICA Siem Reap Smart City Initiative (2026)</li>
+        <li>• <strong>Perfect 4.0 / 4.0 GPA Academic Distinction</strong> — Institute of Technology of Cambodia (Years 1, 2, and 3)</li>
+        <li>• <strong>1st Runner-up (Provincial) & 12th Nationally</strong> — National Physics Outstanding Student Competition (2023)</li>
+        <li>• <strong>Full 5-Year Academic Scholarship</strong> — Institute of Technology of Cambodia (AMT)</li>
+        <li>• <strong>Full Higher Education Scholarship</strong> — Institute of Foreign Languages (IFL, MoEYS)</li>
+        <li>• <strong>75% Merit Scholarship Offer</strong> — Paragon International University</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

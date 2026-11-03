@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lay Sokleab — Data Science Engineering Student</title>
+  <meta name="description" content="Personal portfolio of Lay Sokleab, a 3rd-year Data Science engineering student at ITC. Explore my projects in AI, full-stack development, and data optimization." />
+
+  <!-- Google Fonts: Plus Jakarta Sans (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Feather / Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    // Tailwind Configuration tailored to the design requirements
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            // Calm, welcoming neutral & teal palette (3-4 core colors)
+            brand: {
+              50: '#F0FDFA',
+              100: '#CCFBF1',
+              400: '#2DD4BF',
+              500: '#14B8A6', // Primary Accent Teal
+              600: '#0D9488', // Accent Deep
+              700: '#0F766E',
+            },
+            warm: {
+              bg: '#FAFAF7',       // Soft neutral warm off-white (Light Mode)
+              surface: '#FFFFFF',  // Clean card surface
+              border: '#E8E8E3',   // Subtle warm border
+            },
+            slateDark: {
+              bg: '#0F172A',       // Deep calming navy/slate (Dark Mode)
+              surface: '#1E293B',  // Elevated card surface in dark
+              border: '#334155',   // Subtle border in dark
+            }
+          },
+          maxWidth: {
+            content: '1100px', // As requested: generous breathing room, ~1100px
+          },
+          boxShadow: {
+            soft: '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02)',
+            cardHover: '0 12px 28px -4px rgba(15, 23, 42, 0.09), 0 4px 10px -2px rgba(15, 23, 42, 0.04)',
+            softDark: '0 4px 20px -2px rgba(0, 0, 0, 0.25)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Base typography & color mappings */
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      font-size: 16px;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Subtle hover lift transition (150-250ms) */
+    .card-lift {
+      transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    }
+    .card-lift:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Accessible Focus Ring */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid #0D9488;
+      outline-offset: 3px;
+    }
+
+    /* Gentle scroll reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms ease-out, transform 500ms ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+
+  <!-- Prevent dark mode flash -->
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-warm-bg text-slate-800 dark:bg-slateDark-bg dark:text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- ========================================================================= -->
+  <!-- 1. STICKY NAVIGATION BAR                                                  -->
+  <!-- ========================================================================= -->
+  <header class="sticky top-0 z-50 bg-warm-bg/90 dark:bg-slateDark-bg/90 backdrop-blur-md border-b border-warm-border dark:border-slateDark-border transition-colors">
+    <div class="max-w-content mx-auto px-6 h-18 py-4 flex items-center justify-between">
+      
+      <!-- Logo / Name -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-brand-500 text-white font-heading font-bold text-lg flex items-center justify-center shadow-sm group-hover:bg-brand-600 transition-colors">
+          LS
+        </div>
+        <div>
+          <span class="font-heading font-bold text-slate-900 dark:text-white tracking-tight block text-base group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Lay Sokleab</span>
+          <span class="text-xs text-slate-500 dark:text-slate-400 -mt-1 block font-medium">Data Science Student</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300" aria-label="Main Navigation">
+        <a href="#about" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">About</a>
+        <a href="#projects" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Skills</a>
+        <a href="#experience" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Controls: Theme Toggle & Mobile Menu -->
+      <div class="flex items-center gap-3">
+        <!-- Dark Mode Toggle Button -->
+        <button id="themeToggle" aria-label="Toggle dark mode" class="w-10 h-10 rounded-xl border border-warm-border dark:border-slateDark-border bg-warm-surface dark:bg-slateDark-surface flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-500 transition-all shadow-sm">
+          <i data-lucide="moon" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <!-- Mobile Navigation Hamburger -->
+        <button id="mobileMenuBtn" aria-label="Toggle mobile menu" class="md:hidden w-10 h-10 rounded-xl border border-warm-border dark:border-slateDark-border bg-warm-surface dark:bg-slateDark-surface flex items-center justify-center text-slate-700 dark:text-slate-300">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-warm-surface dark:bg-slateDark-surface border-b border-warm-border dark:border-slateDark-border px-6 py-4 space-y-3">
+      <a href="#about" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mobile-nav-link">About</a>
+      <a href="#projects" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mobile-nav-link">Projects</a>
+      <a href="#skills" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mobile-nav-link">Skills</a>
+      <a href="#experience" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mobile-nav-link">Experience</a>
+      <a href="#contact" class="block py-2 text-sm font-medium text-slate-700 dark:text-slate-200 mobile-nav-link">Contact</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================================= -->
+    <!-- 2. HERO SECTION                                                           -->
+    <!-- ========================================================================= -->
+    <section id="hero" class="pt-16 pb-20 md:pt-24 md:pb-28">
+      <div class="max-w-content mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Text Content -->
+          <div class="lg:col-span-7 space-y-6 reveal">
+            <!-- Friendly greeting badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-400 border border-brand-100 dark:border-brand-500/20 text-sm font-medium">
+              <span>Hi, I'm Lay Sokleab</span>
+              <span class="inline-block animate-wave origin-[70%_70%]">👋</span>
+            </div>
+
+            <div class="space-y-3">
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-heading text-slate-900 dark:text-white leading-[1.15]">
+                Data Science Engineering Student.
+              </h1>
+              <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
+                I study Applied Mathematics and Statistics at the Institute of Technology of Cambodia (ITC), maintaining a 4.0 GPA while building real-world AI and full-stack software.
+              </p>
+            </div>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="#projects" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium bg-brand-600 hover:bg-brand-700 text-white shadow-soft hover:shadow-cardHover transition-all">
+                <span>View Projects</span>
+                <i data-lucide="arrow-down" class="w-4 h-4"></i>
+              </a>
+              <a href="resume.html" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium bg-warm-surface dark:bg-slateDark-surface text-slate-700 dark:text-slate-200 border border-warm-border dark:border-slateDark-border hover:border-brand-500 dark:hover:border-brand-500 transition-all shadow-soft" title="View & Print Official Resume">
+                <i data-lucide="file-text" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                <span>Download CV</span>
+              </a>
+            </div>
+
+            <!-- Quick Trust Badges -->
+            <div class="pt-6 flex flex-wrap items-center gap-y-2 gap-x-6 text-sm text-slate-500 dark:text-slate-400">
+              <div class="flex items-center gap-2">
+                <i data-lucide="award" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                <span>JICA Smart City PoC Winner</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                <span>4.0 GPA across 3 Years</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-600 dark:text-brand-400"></i>
+                <span>Phnom Penh, Cambodia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Photo / Friendly Visual Card -->
+          <div class="lg:col-span-5 reveal">
+            <div class="relative max-w-sm mx-auto">
+              <!-- Soft background decoration -->
+              <div class="absolute inset-0 bg-brand-100 dark:bg-brand-500/10 rounded-3xl transform rotate-3 scale-95 transition-transform"></div>
+              
+              <div class="relative bg-warm-surface dark:bg-slateDark-surface rounded-3xl p-6 border border-warm-border dark:border-slateDark-border shadow-soft">
+                <!-- Avatar Graphic -->
+                <div class="w-32 h-32 mx-auto rounded-2xl bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center text-white text-3xl font-heading font-bold shadow-md mb-6">
+                  LS
+                </div>
+
+                <div class="text-center space-y-1">
+                  <h2 class="text-xl font-heading font-bold text-slate-900 dark:text-white">Lay Sokleab</h2>
+                  <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate at ITC (AMS)</p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-warm-border dark:border-slateDark-border space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400">Core Focus:</span>
+                    <span class="font-medium">Data Science & Edge AI</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400">English Level:</span>
+                    <span class="font-medium">IELTS 6.0 (IDP Certified)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400">Current Status:</span>
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                      Open for Internships
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 3. ABOUT SECTION                                                          -->
+    <!-- ========================================================================= -->
+    <section id="about" class="py-16 md:py-24 border-t border-warm-border dark:border-slateDark-border">
+      <div class="max-w-content mx-auto px-6">
+        
+        <div class="max-w-2xl mb-12 reveal">
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">About Me</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mt-1">
+            Curious about mathematics, driven by real impact.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          <!-- Main Story Paragraph -->
+          <div class="md:col-span-8 space-y-5 text-slate-600 dark:text-slate-300 leading-relaxed text-base reveal">
+            <p>
+              I am currently in my third year studying Data Science and Applied Mathematics and Statistics (AMS) at the Institute of Technology of Cambodia (ITC). My journey started with a deep fascination for physics and math competitions, which earned me a provincial 1st runner-up and national 12th place finish in 2023.
+            </p>
+            <p>
+              Rather than keeping math on paper, I love building things that solve immediate problems. Recently, my team won the <strong>JICA Siem Reap Smart City Proof of Concept (PoC)</strong> by training edge computer vision models on municipal CCTV streams to assist traffic safety. Earlier, I created <em>Your Hope</em>, a bilingual mental health screener integrated with the Claude and Gemini APIs.
+            </p>
+            <p>
+              When I'm not studying or coding, I teach physics and foundational programming to kids at the School of Mathematics and Science. I am currently seeking <strong>internship and collaborative engineering opportunities</strong> where I can contribute analytical rigor and learn from experienced mentors.
+            </p>
+          </div>
+
+          <!-- Highlight Box -->
+          <div class="md:col-span-4 reveal">
+            <div class="bg-warm-surface dark:bg-slateDark-surface p-6 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft space-y-4">
+              <h3 class="font-heading font-semibold text-slate-900 dark:text-white text-sm uppercase tracking-wide">
+                What I Care About
+              </h3>
+              <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                <li class="flex items-start gap-2.5">
+                  <i data-lucide="check" class="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-1"></i>
+                  <span><strong>Clean Code & Math:</strong> Turning complex formulas into readable, maintainable software.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <i data-lucide="check" class="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-1"></i>
+                  <span><strong>Practical AI:</strong> Building tools that assist people instead of creating hype.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <i data-lucide="check" class="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-1"></i>
+                  <span><strong>Mentorship:</strong> Giving back to youth and demystifying STEM topics.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 4. SKILLS SECTION                                                         -->
+    <!-- ========================================================================= -->
+    <section id="skills" class="py-16 md:py-24 bg-warm-surface dark:bg-slateDark-surface/50 border-t border-warm-border dark:border-slateDark-border">
+      <div class="max-w-content mx-auto px-6">
+        
+        <div class="max-w-2xl mb-12 reveal">
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Technical Toolkit</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mt-1">
+            Skills & Competencies
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">
+            Grouped by domain. Every skill listed has been used in coursework, teaching, or shipped applications.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1: Programming -->
+          <div class="bg-warm-bg dark:bg-slateDark-surface p-6 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft card-lift reveal">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-4">
+              <i data-lucide="code-2" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-heading font-bold text-slate-900 dark:text-white text-base mb-3">Programming</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Python</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">C++</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">SQL</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">JavaScript</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">HTML5 & CSS3</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Data & ML -->
+          <div class="bg-warm-bg dark:bg-slateDark-surface p-6 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft card-lift reveal">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-4">
+              <i data-lucide="line-chart" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-heading font-bold text-slate-900 dark:text-white text-base mb-3">Data & Machine Learning</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Edge AI & Vision</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Data Cleaning</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Exploratory EDA</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Convex Optimization</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Claude & Gemini API</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Backend & Tools -->
+          <div class="bg-warm-bg dark:bg-slateDark-surface p-6 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft card-lift reveal">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-4">
+              <i data-lucide="server" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-heading font-bold text-slate-900 dark:text-white text-base mb-3">Backend & Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Node.js</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Express.js</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">MySQL</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">JWT & Bcrypt</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Git & GitHub</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Railway & Netlify</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Languages & Soft Skills -->
+          <div class="bg-warm-bg dark:bg-slateDark-surface p-6 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft card-lift reveal">
+            <div class="w-10 h-10 rounded-xl bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-4">
+              <i data-lucide="smile" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-heading font-bold text-slate-900 dark:text-white text-base mb-3">Communication & Soft Skills</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-brand-50 dark:bg-brand-500/10 text-brand-700 dark:text-brand-300 border border-brand-100 dark:border-brand-500/20">English (IELTS 6.0)</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Khmer (Native)</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">French (Beginner)</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Technical Teaching</span>
+              <span class="px-2.5 py-1 text-xs font-medium rounded-lg bg-warm-surface dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border">Team Collaboration</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 5. PROJECTS SECTION                                                       -->
+    <!-- ========================================================================= -->
+    <section id="projects" class="py-16 md:py-24 border-t border-warm-border dark:border-slateDark-border">
+      <div class="max-w-content mx-auto px-6">
+        
+        <div class="max-w-2xl mb-12 reveal">
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Featured Work</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mt-1">
+            Projects Built for Purpose
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">
+            Each project addresses a practical challenge, from municipal safety to mental health.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- PROJECT 1: Sovatthepheap-SR -->
+          <article class="bg-warm-surface dark:bg-slateDark-surface rounded-2xl border border-warm-border dark:border-slateDark-border overflow-hidden shadow-soft card-lift flex flex-col justify-between reveal">
+            <div>
+              <!-- Visual Thumbnail -->
+              <div class="h-44 bg-gradient-to-br from-teal-500/10 via-brand-500/20 to-slate-800/10 dark:from-brand-500/20 dark:to-slateDark-bg flex flex-col justify-between p-5 border-b border-warm-border dark:border-slateDark-border">
+                <div class="flex justify-between items-start">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 flex items-center gap-1">
+                    <i data-lucide="trophy" class="w-3.5 h-3.5"></i> JICA PoC Winner
+                  </span>
+                  <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2026</span>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border flex items-center justify-center text-brand-600 dark:text-brand-400 shadow-sm">
+                  <i data-lucide="video" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 space-y-3">
+                <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white">
+                  Sovatthepheap-SR
+                </h3>
+                <p class="text-xs text-brand-600 dark:text-brand-400 font-medium">
+                  Smart City Traffic Safety AI System
+                </p>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Real-time edge computer vision analyzing municipal CCTV streams at the Sivutha Road intersection in Siem Reap to assist city authorities with traffic safety insights.
+                </p>
+
+                <!-- Tech Tags -->
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Edge AI</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Computer Vision</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">CCTV Feeds</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 border-t border-warm-border/60 dark:border-slateDark-border/60 flex items-center justify-between mt-4">
+              <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+                <span>View Details</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+              <span class="text-xs text-slate-400 font-mono">Team LAVA · ITC</span>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: YOUR HOPE -->
+          <article class="bg-warm-surface dark:bg-slateDark-surface rounded-2xl border border-warm-border dark:border-slateDark-border overflow-hidden shadow-soft card-lift flex flex-col justify-between reveal">
+            <div>
+              <!-- Visual Thumbnail -->
+              <div class="h-44 bg-gradient-to-br from-blue-500/10 via-indigo-500/15 to-slate-800/10 dark:from-indigo-500/20 dark:to-slateDark-bg flex flex-col justify-between p-5 border-b border-warm-border dark:border-slateDark-border">
+                <div class="flex justify-between items-start">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
+                    AI & Healthcare
+                  </span>
+                  <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2025–2026</span>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border flex items-center justify-center text-indigo-600 dark:text-indigo-400 shadow-sm">
+                  <i data-lucide="heart-pulse" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 space-y-3">
+                <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white">
+                  YOUR HOPE
+                </h3>
+                <p class="text-xs text-brand-600 dark:text-brand-400 font-medium">
+                  Bilingual Mental Health Web Platform
+                </p>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Bilingual (Khmer/English) tool implementing the clinical DASS-21 framework, powered by Claude & Gemini APIs for empathetic guidance and a directory of providers across Cambodia.
+                </p>
+
+                <!-- Tech Tags -->
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Node.js</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">MySQL</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Claude API</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Railway</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 border-t border-warm-border/60 dark:border-slateDark-border/60 flex items-center justify-between mt-4">
+              <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+                <span>View Details</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+              <span class="text-xs text-slate-400 font-mono">DASS-21 Screener</span>
+            </div>
+          </article>
+
+          <!-- PROJECT 3: RentKH -->
+          <article class="bg-warm-surface dark:bg-slateDark-surface rounded-2xl border border-warm-border dark:border-slateDark-border overflow-hidden shadow-soft card-lift flex flex-col justify-between reveal">
+            <div>
+              <!-- Visual Thumbnail -->
+              <div class="h-44 bg-gradient-to-br from-emerald-500/10 via-teal-500/15 to-slate-800/10 dark:from-emerald-500/20 dark:to-slateDark-bg flex flex-col justify-between p-5 border-b border-warm-border dark:border-slateDark-border">
+                <div class="flex justify-between items-start">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30">
+                    Full-Stack Web
+                  </span>
+                  <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2025–2026</span>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border flex items-center justify-center text-emerald-600 dark:text-emerald-400 shadow-sm">
+                  <i data-lucide="home" class="w-6 h-6"></i>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 space-y-3">
+                <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white">
+                  RentKH
+                </h3>
+                <p class="text-xs text-brand-600 dark:text-brand-400 font-medium">
+                  Room Rental Marketplace
+                </p>
+                <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Full-stack property rental platform connecting tenants, landlords, and admins in Cambodia with relational schemas, JWT authentication, and secure password hashing.
+                </p>
+
+                <!-- Tech Tags -->
+                <div class="flex flex-wrap gap-1.5 pt-2">
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Express</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">MySQL</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">JWT</span>
+                  <span class="px-2 py-0.5 text-xs rounded bg-warm-bg dark:bg-slateDark-bg text-slate-600 dark:text-slate-300 border border-warm-border dark:border-slateDark-border">Bcrypt</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="p-6 pt-0 border-t border-warm-border/60 dark:border-slateDark-border/60 flex items-center justify-between mt-4">
+              <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" rel="noopener noreferrer" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+                <span>View Details</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </a>
+              <span class="text-xs text-slate-400 font-mono">Marketplace</span>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 6. EDUCATION & EXPERIENCE (Clean Vertical Timeline)                       -->
+    <!-- ========================================================================= -->
+    <section id="experience" class="py-16 md:py-24 bg-warm-surface dark:bg-slateDark-surface/50 border-t border-warm-border dark:border-slateDark-border">
+      <div class="max-w-content mx-auto px-6">
+        
+        <div class="max-w-2xl mb-12 reveal">
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Milestones</span>
+          <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mt-1">
+            Education & Experience
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">
+            A chronological timeline of academic achievements, teaching, and community involvement.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          
+          <!-- Column 1: Education -->
+          <div class="space-y-6 reveal">
+            <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-600 dark:text-brand-400"></i>
+              <span>Education</span>
+            </h3>
+
+            <div class="relative border-l-2 border-warm-border dark:border-slateDark-border ml-3 pl-6 space-y-8">
+              
+              <!-- Item 1: ITC -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-brand-500 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2023 – Present (3rd Year)</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  Institute of Technology of Cambodia (ITC)
+                </h4>
+                <p class="text-sm font-medium text-brand-600 dark:text-brand-400">
+                  B.Sc. in Data Science / Applied Mathematics and Statistics
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Maintained a perfect <strong>4.0 / 4.0 GPA</strong> across three consecutive years. Full 5-year AMT scholarship holder.
+                </p>
+              </div>
+
+              <!-- Item 2: ACE -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Completed 2026</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  Australian Centre for Education (ACE) & Spring
+                </h4>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Advanced English Language & Communication
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Certified with <strong>IELTS Overall Band 6.0</strong> by IDP Education.
+                </p>
+              </div>
+
+              <!-- Item 3: High School -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Graduated 2023</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  Bunrany Hunsen Speu High School
+                </h4>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  National High School Examination (Baccalaureate II)
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Graduated with <strong>Grade A Distinction</strong>. 1st Runner-up (Provincial) & 12th Nationally in Physics.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Column 2: Experience & Leadership -->
+          <div class="space-y-6 reveal">
+            <h3 class="text-lg font-heading font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="briefcase" class="w-5 h-5 text-brand-600 dark:text-brand-400"></i>
+              <span>Experience & Leadership</span>
+            </h3>
+
+            <div class="relative border-l-2 border-warm-border dark:border-slateDark-border ml-3 pl-6 space-y-8">
+              
+              <!-- Item 1: SMS Instructor -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-brand-500 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Ongoing</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  School of Mathematics and Science (SMS)
+                </h4>
+                <p class="text-sm font-medium text-brand-600 dark:text-brand-400">
+                  Physics & Coding Instructor
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Teach secondary students physics and design programming logic courses tailored to young learners.
+                </p>
+              </div>
+
+              <!-- Item 2: JICA Smart City -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-amber-500 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">2026</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  Siem Reap Smart City Initiative (JICA Framework)
+                </h4>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Proof of Concept (PoC) Winner — Team LAVA
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Developed an edge AI traffic monitoring solution under Dr. Has Sothea, supported by provincial authorities.
+                </p>
+              </div>
+
+              <!-- Item 3: Startup Grind -->
+              <div class="relative">
+                <div class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-warm-bg dark:ring-slateDark-surface"></div>
+                <span class="text-xs font-mono text-slate-500 dark:text-slate-400">July 2025 – January 2026</span>
+                <h4 class="text-base font-heading font-bold text-slate-900 dark:text-white mt-0.5">
+                  Startup Grind Cambodia (Phnom Penh)
+                </h4>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">
+                  Event & Operations Volunteer
+                </p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                  Supported logistics and community engagement for Cambodian startups under Director Bill Sokhy Chea.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 7. CONTACT SECTION                                                        -->
+    <!-- ========================================================================= -->
+    <section id="contact" class="py-16 md:py-24 border-t border-warm-border dark:border-slateDark-border">
+      <div class="max-w-content mx-auto px-6">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Contact Info -->
+          <div class="lg:col-span-5 space-y-6 reveal">
+            <div>
+              <span class="text-xs font-mono font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Get In Touch</span>
+              <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mt-1">
+                Let's talk about projects, math, or internships.
+              </h2>
+            </div>
+            
+            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+              I am open to internship opportunities, research collaborations, or technical questions. Send me a quick note or reach out via LinkedIn.
+            </p>
+
+            <div class="space-y-4 text-sm text-slate-700 dark:text-slate-200">
+              <a href="mailto:laysokleab55@gmail.com" class="flex items-center gap-3 p-3.5 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border hover:border-brand-500 transition-colors">
+                <div class="w-8 h-8 rounded-lg bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </div>
+                <span>laysokleab55@gmail.com</span>
+              </a>
+
+              <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-3.5 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border hover:border-brand-500 transition-colors">
+                <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                  <i data-lucide="linkedin" class="w-4 h-4"></i>
+                </div>
+                <span>linkedin.com/in/sokleab-lay-558654448</span>
+              </a>
+
+              <div class="flex items-center gap-3 p-3.5 rounded-xl bg-warm-surface dark:bg-slateDark-surface border border-warm-border dark:border-slateDark-border">
+                <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                  <i data-lucide="phone" class="w-4 h-4"></i>
+                </div>
+                <span>(+855) 096 267 0901</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Simple Accessible Form -->
+          <div class="lg:col-span-7 reveal">
+            <div class="bg-warm-surface dark:bg-slateDark-surface p-8 rounded-2xl border border-warm-border dark:border-slateDark-border shadow-soft">
+              <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Your Name</label>
+                    <input type="text" id="name" required placeholder="Alex Smith" class="w-full px-4 py-2.5 rounded-xl text-sm bg-warm-bg dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border text-slate-900 dark:text-white placeholder:text-slate-400 transition-colors" />
+                  </div>
+                  <div>
+                    <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Your Email</label>
+                    <input type="email" id="email" required placeholder="alex@example.com" class="w-full px-4 py-2.5 rounded-xl text-sm bg-warm-bg dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border text-slate-900 dark:text-white placeholder:text-slate-400 transition-colors" />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="subject" class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Subject</label>
+                  <input type="text" id="subject" required placeholder="Internship Opportunity / Project Inquiry" class="w-full px-4 py-2.5 rounded-xl text-sm bg-warm-bg dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border text-slate-900 dark:text-white placeholder:text-slate-400 transition-colors" />
+                </div>
+
+                <div>
+                  <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Message</label>
+                  <textarea id="message" rows="4" required placeholder="Hi Lay, I saw your work on Sovatthepheap-SR..." class="w-full px-4 py-2.5 rounded-xl text-sm bg-warm-bg dark:bg-slateDark-bg border border-warm-border dark:border-slateDark-border text-slate-900 dark:text-white placeholder:text-slate-400 transition-colors resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl font-medium bg-brand-600 hover:bg-brand-700 text-white shadow-soft transition-all flex items-center justify-center gap-2">
+                  <span>Send Message</span>
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 8. FOOTER                                                                 -->
+  <!-- ========================================================================= -->
+  <footer class="py-8 border-t border-warm-border dark:border-slateDark-border bg-warm-surface dark:bg-slateDark-surface text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-content mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-heading font-semibold text-slate-700 dark:text-slate-200">Lay Sokleab</span>
+        <span>© 2026 · Built with simplicity & care.</span>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="https://www.linkedin.com/in/sokleab-lay-558654448/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors" title="LinkedIn">LinkedIn</a>
+        <a href="mailto:laysokleab55@gmail.com" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Email</a>
+        <a href="#hero" class="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: THEME TOGGLE, SCROLL REVEAL & FORM LOGIC                      -->
+  <!-- ========================================================================= -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.theme = isDark ? 'dark' : 'light';
+    });
+
+    // 2. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // 3. Gentle Scroll-Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 4. Contact Form Handler (Opens pre-filled mailto)
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      
+      const mailtoUrl = `mailto:laysokleab55@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + "\n\n" + message)}`;
+      window.location.href = mailtoUrl;
+    }
+  </script>
+</body>
+</html>
